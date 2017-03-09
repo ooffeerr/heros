@@ -23,6 +23,11 @@ import { DashboardComponent } from './dashboard.component';
         component: HeroesComponent
       },
       {
+        path: 'dashboard',
+        component: DashboardComponent
+      },
+
+      {
   		path: 'detail/:id',
   		component: HeroDetailComponent
 	},
