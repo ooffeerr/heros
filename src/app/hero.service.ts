@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 
 import {Hero} from './hero';
-import {HEROS} from './mock-heros';
 import { Http }    from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
@@ -29,6 +28,10 @@ export class HeroService {
   	}
 
 	getHero(id: number): Promise<Hero> {
-		return this.getHeroes().then(heros => heros.find(hero=>hero.id === id));
-	}
+  	const url = `${this.heroesUrl}/${id}`;
+ 	 return this.http.get(url)
+    .toPromise()
+    .then(response => response.json().data as Hero)
+    .catch(this.handleError);
+}
 }
