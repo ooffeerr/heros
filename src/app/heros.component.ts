@@ -48,6 +48,14 @@ export class HeroesComponent {
           this.selectedHero = null;
     });
   }
+
+  delete(hero: Hero): void {
+    console.log('deleting hero: ' + hero)
+    this.heroService.delete(hero.id)
+    .then(() => {
+      this.heroes = this.heroes.filter(h=> h !== hero);
+    })
+  }
 }
 
 
