@@ -42,4 +42,18 @@ export class HeroDetailComponent
   	this.heroService.update(this.hero)
     .then(() => this.goBack());
   }
+
+  add(name: String) {
+    name = name.trim();
+    if (!name) {
+      console.log("add, empty name ")
+      return ;
+    }
+    console.log("adding " + name)
+    
+    this.heroService.create(name).then(hero=> {
+      this.heroes.push(hero);
+      this.selectedHero = null;
+    })
+  }
 }
