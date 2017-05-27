@@ -12,14 +12,20 @@ export class HeroService {
 
 	constructor(private http:Http) {}
 
-	private heroesUrl = 'api/heroes';  // URL to web api
+	private heroesUrl = 'http://localhost:8080/heros';  // URL to web api
+  //private heroesUrl = 'localhost:8080/heros';  // URL to web api
 
 	getHeroes(): Promise<Hero[]> {
-  		return this.http.get(this.heroesUrl)
+    console.log("getHeros: " + this.heroesUrl)
+    this.headers = new Headers();
+    this.headers.append('Access-Control-Allow-Origin', '*');
+  	return this.http.get(this.heroesUrl, this.headers)
   				.toPromise()
-  				.then(response => response.json().data as Hero[])
+  				.then( response =>
+              response.json() as Hero[]         
+          )
+          
   				.catch(this.handleError);
-  		//Promise.resolve(HEROS);
 	}
 
 	private handleError(error: any): Promise<any> {
